@@ -1,5 +1,5 @@
 ---
-title: Paper title
+title: Neighborhood and individual-level predictors of COVID-19 seropositivity among Canadian blood donors across three pandemic waves
 author: 
 output: 
   officedown::rdocx_document:
@@ -17,7 +17,7 @@ header-includes:
 
 \newcommand{\1}{\textbf{1}}
 
-W. Alton Russell^1^, others
+Yuan Yu^1^, W. Alton Russell^1^, others
 
 <br>
 
@@ -25,9 +25,9 @@ W. Alton Russell^1^, others
 
 <br>
 
-**Corresponding author:**
+**Corresponding author:** Yuan Yu
 
-**Key words:**
+**Key words:** Blood Donor; COVID-19; Surveillance; Bayesian multilevel regression; CAR
 
 **Running title:**
 
@@ -71,14 +71,15 @@ sourcestr_t_samp <- gen_tab_sourcestr(df_samp$Source)
 ```
 
 # Abstract
+The Canadian Blood Services (CBS) plays a major role in monitoring COVID-19 immunity levels in Canada through the testing of randomly selected blood donations. While blood donors are a convenient and cost-effective group for monitoring public health, their characteristics may not reflect those of the general population. Therefore, it is important to evaluate and adjust for any potential biases in using this convenience population for public health surveillance. In this study, we assessed the correlation between demographic covariates COVID-19 seropositivity across three pandemic waves (Pre-Delta, Delta, and Omicron) in four regions (Ontario, British Columbia, Prairies region and Atlantic region). We also compared multilevel modeling approaches with or without spatial effects. We found that Bayesian multilevel models with conditional autoregressive priors explained most of the variation in COVID-19 seropositivity when using individual factors and spatial factors. Our findings highlight how Bayesian multilevel modeling using antibody test data can provide valuable insights into COVID-19 immunity levels in the population, informing policymaking. 
 
-**Background:** A
+**Background:** 
 
-**Methods:** A
+**Methods:** Multilevel Regression with the regular fixed effects, as well as different unstructured or structured random effects (ICAR prior) are evaluated to fit the CBS data across four major regions (Ontario, British Columbia, the Parries region and the Atlantic Region) during three pandemic waves (Pre-delta, Delta & Omicron). We conducted our analysis through brms which allows comparing varies GLM. 
 
-**Results:** A
+**Results:** Multilevel modeling with structured random effects consistently provides a better model fit across the regions during each of the three waves, compared with generalized linear model with just fixed effects or the unstructured random effect only. However, the coefficient estimation from the posterior distribution shows that donation from a rural area tends to result in a higher seropositivity, especially for the Prairies region.  
 
-**Conclusions:** A
+**Conclusions:** It is crucial to control the increasing seropositivity by adding the month covariate, especially during Omicron period as the significant trend involves. Though it is counterfactual from our initial guess that people from urban areas are more likely to be infected by living under larger population density, it indicates that we might need to incorporate other covariates like vaccination status and more general self-precaution being carried-out. It is also showed from other studies that the high seropositivity may cause by less precautions from rural areas.
 
 ##### 
 
@@ -106,7 +107,7 @@ sourcestr_t_samp <- gen_tab_sourcestr(df_samp$Source)
 
 # Discussion
 
-> A
+> Our study focused on how the socio-demographic feature will affect the overall seropositivity the coefficient estimation of area-level covariates like social/material deprivation index quantiles, particularly for urban/rural effect across different pandemic waves. We expected that in the beginning stage of the outbreak of SARS-CoV-2, which is the first wave, living in the urban tends to higher opportunity of the infection, yet not obvious. As the epidemic grow to the later waves, especially Omicron stage, the effect of urban or rural begins to wane as the gradually released public health policy in the omicron period. 
 
 <br>
 
@@ -137,38 +138,7 @@ sourcestr_t_samp <- gen_tab_sourcestr(df_samp$Source)
 
 # Tables
 
-```{r}
-tab_num <- run_autonum(seq_id = "tab", 
-                       pre_label = "Table ", 
-                       bkm="t-sample",
-                       bkm_all = TRUE,
-                       prop = fp_text(bold=TRUE, underlined = TRUE))
 
-
-t_samp <- as_flextable(as_grouped_data(df_samp,
-                                              groups = "subhead"))
-t_samp <- compose(t_samp, i = ~ !is.na(subhead), j = "col1",
-              value = as_paragraph(as_chunk(subhead)))
-
-t_samp <- fontsize(t_samp, size = 10, part = "all")
-t_samp <- font(t_samp, fontname = "Times", part = "all")
-t_samp <- theme_box(t_samp)
-t_samp <- bg(t_samp, bg = "#EAEAEA", part = "header")
-t_samp <- width(t_samp, 1, 1.7)
-t_samp <- bg(t_samp, i = c(1, 4), bg = "#DDDDDD", part = "body")
-t_samp <- bold(t_samp, i = c(1, 4), part = "body")
-t_samp <- align(t_samp, align = "left", part = "all")
-t_samp <- set_caption(t_samp,
-                      "This is a sample table.",
-                      autonum = tab_num)
-# t_samp <- footnote(t_samp, i=1, j=1, part="header",ref_symbols ="1",
-#                          value=as_paragraph("This is a footnote."))
-t_samp <-  colformat_md(t_samp, j=2:4, part="body",
-                        pandoc_args = c('--csl', 'refs-in-tables.csl'))
-
-
-t_samp
-```
 
 ##### 
 
@@ -201,32 +171,6 @@ block_caption("This is a figure caption.",
 
 # Supplemental tables
 
-```{r}
-stab_num <- run_autonum(seq_id = "stab", 
-                       pre_label = "Table S", 
-                       bkm="t-sample-2",
-                       bkm_all = TRUE,
-                       prop = fp_text(bold=TRUE, underlined = TRUE))
-
-t_samp <- as_flextable(as_grouped_data(read_excel("../1_data/tables.xlsx", sheet = "sample"),
-                                              groups = "subhead"))
-t_samp <- compose(t_samp, i = ~ !is.na(subhead), j = "col1",
-              value = as_paragraph(as_chunk(subhead)))
-t_samp <- fontsize(t_samp, size = 10, part = "all")
-t_samp <- font(t_samp, fontname = "Times", part = "all")
-t_samp <- theme_box(t_samp)
-t_samp <- bg(t_samp, bg = "#EAEAEA", part = "header")
-t_samp <- width(t_samp, 1, 1.7)
-t_samp <- bg(t_samp, i = c(1, 4), bg = "#DDDDDD", part = "body")
-t_samp <- bold(t_samp, i = c(1, 4), part = "body")
-t_samp <- set_caption(t_samp,
-                      "This is a sample table.",
-                      autonum = stab_num)
-t_samp <- align(t_samp, align = "left", part = "all")
-t_samp <-  colformat_md(t_samp, j=2:4, part="body")
-
-t_samp
-```
 
 ##### 
 
