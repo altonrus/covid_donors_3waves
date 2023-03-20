@@ -70,16 +70,15 @@ df_samp <- read_excel("../1_data/tables.xlsx", sheet = "sample")
 sourcestr_t_samp <- gen_tab_sourcestr(df_samp$Source)
 ```
 
-# Abstract
-The Canadian Blood Services (CBS) plays a major role in monitoring COVID-19 immunity levels in Canada through the testing of randomly selected blood donations. While blood donors are a convenient and cost-effective group for monitoring public health, their characteristics may not reflect those of the general population. Therefore, it is important to evaluate and adjust for any potential biases in using this convenience population for public health surveillance. In this study, we assessed the correlation between demographic covariates COVID-19 seropositivity across three pandemic waves (Pre-Delta, Delta, and Omicron) in four regions (Ontario, British Columbia, Prairies region and Atlantic region). We also compared multilevel modeling approaches with or without spatial effects. We found that Bayesian multilevel models with conditional autoregressive priors explained most of the variation in COVID-19 seropositivity when using individual factors and spatial factors. Our findings highlight how Bayesian multilevel modeling using antibody test data can provide valuable insights into COVID-19 immunity levels in the population, informing policymaking. 
+# Abstract (~250)
 
-**Background:** 
+**Background:** The Canadian Blood Services (CBS) plays a major role in monitoring COVID-19 immunity levels in Canada through the testing of randomly selected blood donations. In this study, we assessed the correlation between demographic covariates COVID-19 seropositivity across three pandemic waves (Pre-Delta, Delta, and Omicron) in four regions (Ontario, British Columbia, Prairies region and Atlantic region). We also compared multilevel modeling approaches with or without spatial effects.
 
 **Methods:** Multilevel Regression with the regular fixed effects, as well as different unstructured or structured random effects (ICAR prior) are evaluated to fit the CBS data across four major regions (Ontario, British Columbia, the Parries region and the Atlantic Region) during three pandemic waves (Pre-delta, Delta & Omicron). We conducted our analysis through brms which allows comparing varies GLM. 
 
-**Results:** Multilevel modeling with structured random effects consistently provides a better model fit across the regions during each of the three waves, compared with generalized linear model with just fixed effects or the unstructured random effect only. However, the coefficient estimation from the posterior distribution shows that donation from a rural area tends to result in a higher seropositivity, especially for the Prairies region.  
+**Results:** We used indivual covariates (age, sex, race) and neighborhood covariates (urbanicity, material and social depirvation) to predict COVID seropositivity. Multilevel modeling with structured random effects consistently provides a better model fit across the regions during each of the three waves, compared with generalized linear model with just fixed effects or the unstructured random effect only. However, the coefficient estimation from the posterior distribution shows that donation from a rural area tends to result in a higher seropositivity, especially for the Prairies region.  
 
-**Conclusions:** It is crucial to control the increasing seropositivity by adding the month covariate, especially during Omicron period as the significant trend involves. Though it is counterfactual from our initial guess that people from urban areas are more likely to be infected by living under larger population density, it indicates that we might need to incorporate other covariates like vaccination status and more general self-precaution being carried-out. It is also showed from other studies that the high seropositivity may cause by less precautions from rural areas.
+**Conclusions:** We found that Bayesian multilevel models with conditional autoregressive priors explained most of the variation in COVID-19 seropositivity when using individual factors and spatial factors. Our findings highlight how Bayesian multilevel modeling using antibody test data can provide valuable insights into COVID-19 immunity levels in the population, informing policymaking.  It is crucial to control the increasing seropositivity by adding the month covariate, especially during Omicron period as the significant trend involves. Though it is counterfactual from our initial guess that people from urban areas are more likely to be infected by living under larger population density, it indicates that we might need to incorporate other covariates like vaccination status and more general self-precaution being carried-out. It is also showed from other studies that the high seropositivity may cause by less precautions from rural areas.
 
 ##### 
 
@@ -91,17 +90,33 @@ The Canadian Blood Services (CBS) plays a major role in monitoring COVID-19 immu
 
 # Methods
 
-> See `r run_reference("t-sample")` `r sourcestr_t_samp` and \@ref(tab:t-sample-2).
 
-## Subsection
+
+## Data
 
 > See `r run_reference("f-sample")`. See `r run_reference("f-sample-2")`.
+
+## Modeling method
+
+> Modeling each region separately
+
+> Multilevel model without spacial effects
+
+> Multilevel model with spatial effects
 
 <br>
 
 # Results
 
+## Selecting model approach
+
 > A
+
+## Predictors of seropositivity by region and wave
+
+
+## Predicitons by census division
+
 
 <br>
 
@@ -138,11 +153,20 @@ The Canadian Blood Services (CBS) plays a major role in monitoring COVID-19 immu
 
 # Tables
 
+## Table 1: Mean absolute bias by model type, region and wave
 
+
+Model performance estimates for 3 models
 
 ##### 
 
 # Figures
+
+## Coefficients for individual and neighborhood covariates by COVID-19 wave and region
+
+
+## Time trend for coefficient
+
 
 ```{r fig.width=5, fig.height=1}
 fig_num <- run_autonum(seq_id = "fig",
@@ -171,10 +195,30 @@ block_caption("This is a figure caption.",
 
 # Supplemental tables
 
+## Characteristics of donors tested for COIVD-19 antibodies by neighborhood and individual characteristics
+
+https://cran.r-project.org/web/packages/tableone/vignettes/introduction.html
+
+tab3 <- CreateTableOne(vars = myVars, strata = "trt" , data = pbc, factorVars = catVars)
+stratify by region
+Include wave as one of the factors
+
+## Widely applicable information criterion (WAIC) model type, region and wave
 
 ##### 
 
 # Supplemental figures
+
+## Timing of COVID serological testing by Canadian Blood Services
+
+Ask Sheila to provide
+
+## Posterior predicted seropositivity vs. observed seropositivy by census division: Modeling each census division individually
+
+## Posterior predicted seropositivity vs. observed seropositivy by census division: Multilevel model without spacial effects
+
+## Posterior predicted seropositivity vs. observed seropositivy by census division: Multilevel model with spatial effects
+
 
 ```{r}
 #sfig_autonum <- run_autonum(seq_id = "sfig", pre_label = "Figure S", bkm="f-sample-2", start_at=1)
