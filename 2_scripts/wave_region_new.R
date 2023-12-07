@@ -1,3 +1,4 @@
+# Generating Figure 1-2, Supplement Figure S1-S2
 #BC
 pr_name <- 'BC'
 data5_alpha <- data5[data5$sampledate >= '2020-12-14' & data5$sampledate < '2021-08-01',]

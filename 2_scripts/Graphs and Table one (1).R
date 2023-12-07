@@ -1,3 +1,4 @@
+# Generating Table 1; Supplement Table S1-S3, Figure S9 - S12
 library(DBI)
 library(dplyr)
 library(ggplot2)
@@ -41,6 +42,7 @@ con <- dbConnect(
 data_init <- dbGetQuery(con, "SELECT * FROM students.copy_cbs_combined") 
 dbDisconnect(con)
 
+#Import the table assigning the cduid to the fsa
 match = read.csv("/home/yuanyu/projects/covid_donors_3waves/1_data/data6_map.csv")%>%mutate(
   sampledate = as.Date(sampledate)
 )

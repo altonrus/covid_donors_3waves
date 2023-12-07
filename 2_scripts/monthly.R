@@ -1,4 +1,4 @@
-
+# Generating Supplement Figure S3 - S8
 data6_all <- rbind(data5_alpha, data5_delta, data5_omicron)
 
 df_counts <- data6 %>%
