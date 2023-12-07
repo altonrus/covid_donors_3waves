@@ -240,7 +240,9 @@ We used individual covariates (age, sex, race) and neighborhood covariates (urba
 [@marine_barjoan_impact_2023],
 [@k_associations_2017],
 [@bergeri_global_2022],
-[@chen_serological_2021]
+[@chen_serological_2021],
+[@government_of_canada_population_2018]
+
 
 
 ##### 
